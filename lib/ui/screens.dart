@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../core/categorizer.dart';
@@ -350,6 +351,15 @@ class SettingsScreen extends StatelessWidget {
               onSelectionChanged: (v) => s.setCurrency(v.first),
             ),
           ]),
+        ),
+      ),
+      const SizedBox(height: 16),
+      Card(
+        child: ListTile(
+          leading: const Icon(Icons.info_outline_rounded),
+          title: Text(l.tr('about'), style: const TextStyle(fontWeight: FontWeight.w700)),
+          trailing: const Icon(Icons.chevron_right_rounded),
+          onTap: () => context.push('/about'),
         ),
       ),
     ]);

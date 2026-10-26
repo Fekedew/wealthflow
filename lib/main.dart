@@ -9,6 +9,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'core/l10n.dart';
 import 'core/theme.dart';
 import 'data/store.dart';
+import 'ui/about_screen.dart';
 import 'ui/auth_screen.dart';
 import 'ui/dashboard.dart';
 import 'ui/screens.dart';
@@ -48,6 +49,7 @@ class _WealthFlowAppState extends State<WealthFlowApp> {
       },
       routes: [
         GoRoute(path: '/auth', builder: (_, _) => const AuthScreen()),
+        GoRoute(path: '/about', builder: (_, _) => const AboutScreen()),
         ShellRoute(
           builder: (_, __, child) => Shell(child: child),
           routes: [
