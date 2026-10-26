@@ -7,14 +7,10 @@ auto-categorization, insights, dark mode, English + Amharic, Ctrl/⌘+K command 
 1. Create a project, then apply `supabase/migrations/20261026000000_init.sql`
    (tables, RLS policies, realtime publication).
 2. Auth → Providers → Email: turn **Confirm email** off (no verification).
-3. Run with your project values:
-
-```
-flutter run -d chrome \
-  --dart-define=SUPABASE_URL=https://<ref>.supabase.co \
-  --dart-define=SUPABASE_PUBLISHABLE_KEY=<publishable key>
-```
-Without these the app still runs in guest (local-only) mode.
+3. Put your project values in `.env` (already set for the `wealthflow` project; only
+   the public URL and publishable key belong there), then just run `flutter run`.
+   `--dart-define=SUPABASE_URL=… --dart-define=SUPABASE_PUBLISHABLE_KEY=…` overrides `.env`.
+Without either the app still runs in guest (local-only) mode.
 
 ## How it works
 - `lib/data/store.dart`: local cache (shared_preferences) + persistent write queue pushed to Supabase; realtime channel triggers re-sync; reconnect flushes the queue.

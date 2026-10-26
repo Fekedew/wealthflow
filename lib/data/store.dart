@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
@@ -10,8 +11,14 @@ import 'package:uuid/uuid.dart';
 import '../core/categorizer.dart';
 import '../core/models.dart';
 
-const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
-const supabaseKey = String.fromEnvironment('SUPABASE_PUBLISHABLE_KEY');
+// `--dart-define` wins; otherwise values come from the bundled `.env` file.
+String _config(String key, String defined) =>
+    defined.isNotEmpty ? defined : (dotenv.maybeGet(key) ?? '');
+
+String get supabaseUrl =>
+    _config('SUPABASE_URL', const String.fromEnvironment('SUPABASE_URL'));
+String get supabaseKey => _config(
+    'SUPABASE_PUBLISHABLE_KEY', const String.fromEnvironment('SUPABASE_PUBLISHABLE_KEY'));
 bool get backendConfigured => supabaseUrl.isNotEmpty && supabaseKey.isNotEmpty;
 
 const _tables = ['transactions', 'budgets', 'goals'];
